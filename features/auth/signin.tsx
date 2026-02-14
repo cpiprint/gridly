@@ -1,0 +1,117 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { authConfig } from "@/config";
+import Link from "next/link";
+import { useState } from "react";
+import { FaGoogle, FaGithub, FaDiscord } from "react-icons/fa";
+import type { IconType } from "react-icons";
+import { Spinner } from "@/components/ui/spinner";
+import { signIn } from "@/lib/auth-client";
+// Provider display config — icon + label
+// Buyer can extend this when adding new providers
+const providerMeta: Record<string, { icon: IconType; label: string }> = {
+  github: { icon: FaGithub, label: "GitHub" },
+  google: { icon: FaGoogle, label: "Google" },
+  discord: { icon: FaDiscord, label: "Discord" },
+};
+
+export function SignInForm({
+  className,
+  ...props
+}: React.ComponentProps<"form">) {
+  const { auth } = authConfig;
+  const [loading, setLoading] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSignIn = async (provider: "github" | "google" | "discord") => {
+    setLoading(provider);
+    setError(null);
+    try {
+      await signIn.social({
+        provider,
+        callbackURL: auth.redirectAfterSignIn,
+      });
+    } catch (err) {
+      setError("Failed to sign in. Please try again.");
+      console.error(err);
+      setLoading(null);
+    }
+  };
+
+  return (
+    <form className={cn("flex flex-col gap-8", className)} {...props}>
+      {/* Header */}
+      <div className="flex flex-col gap-2">
+        <h1 className="text-2xl font-doto tracking-tight flex flex-col gap-1">
+          <span className="text-primary flex items-center gap-3 font-bold">
+            {auth.title}
+            <auth.titleIcon className="size-8 fill-primary/20" />
+          </span>
+        </h1>
+        <p className="text-muted-foreground text-sm leading-relaxed">
+          {auth.subtitle}
+        </p>
+      </div>
+
+      {error && (
+        <div className="bg-destructive/10 border border-destructive/20 text-destructive text-xs px-4 py-2 rounded-lg">
+          {error}
+        </div>
+      )}
+
+      {/* Social login buttons — driven by authConfig.providers */}
+      <div className="flex flex-col gap-3">
+        {auth.providers.map((provider) => {
+          const meta = providerMeta[provider];
+          if (!meta) return null;
+          const Icon = meta.icon;
+          const isProviderLoading = loading === provider;
+
+          return (
+            <Button
+              key={provider}
+              onClick={() =>
+                handleSignIn(provider as "github" | "google" | "discord")
+              }
+              disabled={!!loading}
+              variant="outline"
+              type="button"
+              size="lg"
+              className="w-full justify-center gap-3 h-12 hover:border-primary/50 hover:bg-primary/5 transition-all cursor-pointer disabled:opacity-50"
+            >
+              {isProviderLoading ? <Spinner /> : <Icon className="size-5" />}
+              <span>
+                {isProviderLoading
+                  ? `Connecting to ${meta.label}...`
+                  : `Continue with ${meta.label}`}
+              </span>
+            </Button>
+          );
+        })}
+      </div>
+
+      {/* Footer note */}
+      <p className="text-xs text-muted-foreground text-center leading-relaxed">
+        By continuing, you agree to our{" "}
+        <Link
+          href="/terms"
+          className="text-primary/50 hover:underline underline-offset-4"
+          prefetch
+        >
+          Terms
+        </Link>{" "}
+        and{" "}
+        <Link
+          href="/privacy"
+          className="text-primary/50 hover:underline underline-offset-4"
+          prefetch
+        >
+          Privacy Policy
+        </Link>
+        .
+      </p>
+    </form>
+  );
+}
