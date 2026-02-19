@@ -9,6 +9,7 @@ import { FaGoogle, FaGithub, FaDiscord } from "react-icons/fa";
 import type { IconType } from "react-icons";
 import { Spinner } from "@/components/ui/spinner";
 import { signIn } from "@/lib/auth-client";
+import { useSearchParams } from "next/navigation";
 // Provider display config — icon + label
 // Buyer can extend this when adding new providers
 const providerMeta: Record<string, { icon: IconType; label: string }> = {
@@ -22,6 +23,14 @@ export function SignInForm({
   ...props
 }: React.ComponentProps<"form">) {
   const { auth } = authConfig;
+  const searchParams = useSearchParams();
+  const callbackURLParam = searchParams.get("callbackURL");
+  const callbackURL =
+    callbackURLParam &&
+    callbackURLParam.startsWith("/") &&
+    !callbackURLParam.startsWith("//")
+      ? callbackURLParam
+      : auth.redirectAfterSignIn;
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,7 +40,7 @@ export function SignInForm({
     try {
       await signIn.social({
         provider,
-        callbackURL: auth.redirectAfterSignIn,
+        callbackURL,
       });
     } catch (err) {
       setError("Failed to sign in. Please try again.");

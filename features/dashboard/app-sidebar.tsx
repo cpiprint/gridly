@@ -29,13 +29,13 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="border-b border-dashed px-4 py-3">
-        <Link href="/" className="flex items-center gap-3 group" prefetch>
+      <SidebarHeader className="border-b border-dashed px-6 py-5 min-h-24 justify-center">
+        <Link href="/" className="flex items-center gap-4.5 group" prefetch>
           <GridlyLogo
-            size={16}
+            size={30}
             className="text-primary/60 group-hover:text-primary transition-colors"
           />
-          <span className="font-doto text-sm uppercase tracking-widest font-bold">
+          <span className="font-doto text-xl leading-none uppercase tracking-[0.2em] font-bold">
             {appConfig.name}
           </span>
         </Link>
@@ -65,12 +65,12 @@ export function AppSidebar() {
             {appConfig.name} v1
           </span>
           <div className="flex items-center gap-1">
-            <ModeToggle />
+            <ModeToggle className="size-8" />
             <Button
               variant="ghost"
               size="icon"
               onClick={handleSignOut}
-              className="size-8 text-muted-foreground hover:text-destructive transition-colors cursor-pointer"
+              className="size-8 rounded-[var(--radius)] text-muted-foreground hover:text-destructive transition-colors cursor-pointer"
             >
               <LogOutIcon className="size-4" />
             </Button>

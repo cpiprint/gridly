@@ -1,6 +1,7 @@
 import SignInPage from "@/features/auth/auth";
-
-const page = () => {
+import { requireUnauth } from "@/lib/auth-utils";
+const page = async () => {
+  await requireUnauth();
   return <SignInPage />;
 };
 

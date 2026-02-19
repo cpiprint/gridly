@@ -66,7 +66,7 @@ export const authConfig = {
     title: "Welcome Back",
     subtitle: "Sign in to start building your next idea",
     titleIcon: HandshakeIcon,
-    providers: ["github", "google", "discord", "x"] as const,
+    providers: ["github", "google", "discord"] as const,
     redirectAfterSignIn: "/dashboard",
     redirectAfterSignOut: "/",
   },
@@ -278,6 +278,10 @@ export const landingConfig = {
 
 // ─── Dashboard ───────────────────────────────────────
 export const dashboardConfig = {
+  sidebar: {
+    width: "18.5rem",
+    widthIcon: "3rem",
+  },
   nav: [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboardIcon },
     { title: "AI Chat", url: "/ai", icon: MessageSquareIcon },
