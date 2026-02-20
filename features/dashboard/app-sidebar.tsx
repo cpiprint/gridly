@@ -103,11 +103,14 @@ export function AppSidebar() {
                   >
                     <Avatar className="h-8 w-8 rounded-lg">
                       <AvatarImage
-                        src={session.user.image || ""}
-                        alt={session.user.name}
-                      />
-                      <AvatarFallback className="rounded-lg bg-primary/10 text-primary">
-                        {session.user.name.slice(0, 2).toUpperCase()}
+<AvatarImage
+src={session.user.image ?? ""}
+alt={session.user.name ?? "User"}
+/>
+<AvatarFallback className="rounded-lg bg-primary/10 text-primary">
+{(session.user.name ?? "U").slice(0, 2).toUpperCase()}
+</AvatarFallback>
+
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
