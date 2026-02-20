@@ -4,31 +4,22 @@ import { polar, checkout, webhooks } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
 import prisma from "./db";
 import { plansConfig } from "@/config";
+import { getEnabledSocialProvidersConfig } from "./auth-providers";
+import { applyOrderPaidEntitlement } from "./billing";
+
+const socialProviders = getEnabledSocialProvidersConfig();
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN!,
-  server: "sandbox", // Change to "production" when going live
+  server: process.env.NODE_ENV === "production" ? "production" : "sandbox",
 });
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
-    debugLogs: true,
+    debugLogs: process.env.NODE_ENV !== "production",
   }),
-  socialProviders: {
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    },
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    },
-    discord: {
-      clientId: process.env.DISCORD_CLIENT_ID as string,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
-    },
-  },
+  socialProviders,
   plugins: [
     polar({
       client: polarClient,
@@ -36,17 +27,16 @@ export const auth = betterAuth({
       use: [
         checkout({
           products: plansConfig.map((plan) => ({
-            productId: plan.priceId,
-            slug: plan.name.toLowerCase().replace(/\s+/g, "-"),
+            productId: plan.productId,
+            slug: plan.slug,
           })),
-          successUrl: "/dashboard?checkout=success",
-          authenticatedUsersOnly: false,
+          successUrl: process.env.POLAR_SUCCESS_URL as string,
+          authenticatedUsersOnly: true,
         }),
         webhooks({
           secret: process.env.POLAR_WEBHOOK_SECRET!,
           onOrderPaid: async (payload) => {
-            console.log("[Polar] Order paid:", payload.data.customer.email);
-            // You can update user records here once webhook is configured
+            await applyOrderPaidEntitlement(payload);
           },
         }),
       ],

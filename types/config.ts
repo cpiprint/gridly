@@ -6,7 +6,9 @@ export type Plan = {
   name: string;
   description: string;
   price: number; // monthly price in USD, 0 = free
-  priceId: string; // Stripe Price ID (from .env or Stripe dashboard)
+  billingPeriod: "month" | "one_time";
+  slug: string;
+  productId: string; // Polar Product ID
   features: string[];
   cta: string;
   highlighted?: boolean; // "Most popular" badge
@@ -46,4 +48,16 @@ export type FAQItem = {
 export type FooterLink = {
   label: string;
   href: string;
+};
+
+export type LegalSection = {
+  title: string;
+  body: string[];
+};
+
+export type LegalDocument = {
+  title: string;
+  lastUpdated: string;
+  intro: string;
+  sections: LegalSection[];
 };

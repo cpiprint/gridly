@@ -1,8 +1,6 @@
 import { DashboardHeader } from "@/features/dashboard/dashboard-header";
-import { requireAuth } from "@/lib/auth-utils";
 
 export default async function DashboardPage() {
-  await requireAuth();
   return (
     <>
       <DashboardHeader title="Dashboard" />

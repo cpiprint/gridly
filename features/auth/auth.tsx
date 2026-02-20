@@ -1,9 +1,11 @@
 import { appConfig, authConfig } from "@/config";
 import Link from "next/link";
 import { SignInForm } from "./signin";
+import { getEnabledAuthProviders } from "@/lib/auth-providers";
 
 export default function SignInPage() {
   const { marketing } = authConfig;
+  const enabledProviders = getEnabledAuthProviders();
 
   return (
     <main className="h-svh bg-background">
@@ -50,7 +52,7 @@ export default function SignInPage() {
           {/* Right panel — form */}
           <div className="flex items-center justify-center p-6 md:p-10">
             <div className="w-full max-w-sm">
-              <SignInForm />
+              <SignInForm enabledProviders={enabledProviders} />
             </div>
           </div>
         </div>

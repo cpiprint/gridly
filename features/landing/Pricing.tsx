@@ -18,7 +18,6 @@ const Pricing = () => {
   const handleCheckout = async (productId: string) => {
     await authClient.checkout({
       products: [productId],
-      
     });
   };
 
@@ -80,8 +79,11 @@ const Pricing = () => {
                 <span className="text-4xl font-bold font-doto tracking-tighter">
                   {plan.price === 0 ? "Free" : `$${plan.price}`}
                 </span>
-                {plan.price > 0 && (
+                {plan.price > 0 && plan.billingPeriod === "month" && (
                   <span className="text-muted-foreground text-sm">/month</span>
+                )}
+                {plan.price > 0 && plan.billingPeriod === "one_time" && (
+                  <span className="text-muted-foreground text-sm">one-time</span>
                 )}
               </div>
 
@@ -108,7 +110,7 @@ const Pricing = () => {
                 )}
                 size="lg"
                 variant={plan.highlighted ? "default" : "outline"}
-                onClick={() => handleCheckout(plan.priceId)}
+                onClick={() => handleCheckout(plan.productId)}
               >
                 {plan.cta}
               </Button>

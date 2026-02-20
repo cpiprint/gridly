@@ -149,7 +149,7 @@ export function AppSidebar() {
                   <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
                       <Link
-                        href="/dashboard/settings"
+                        href="/settings"
                         className="cursor-pointer"
                       >
                         <SettingsIcon className="mr-2 size-4" />
