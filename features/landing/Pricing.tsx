@@ -15,11 +15,16 @@ import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
 
 const Pricing = () => {
-  const handleCheckout = async (productId: string) => {
-    await authClient.checkout({
-      products: [productId],
-    });
-  };
+const handleCheckout = async (productId: string) => {
+try {
+await authClient.checkout({
+products: [productId],
+});
+} catch (error) {
+console.error("Checkout failed:", error);
+// TODO: Show user-friendly error message (toast/alert)
+}
+};
 
   return (
     <section className="container mx-auto max-w-4xl px-6 py-16 md:py-18 text-left border-x border-dashed border-b">
