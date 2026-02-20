@@ -103,14 +103,11 @@ export function AppSidebar() {
                   >
                     <Avatar className="h-8 w-8 rounded-lg">
                       <AvatarImage
-<AvatarImage
-src={session.user.image ?? ""}
-alt={session.user.name ?? "User"}
-/>
-<AvatarFallback className="rounded-lg bg-primary/10 text-primary">
-{(session.user.name ?? "U").slice(0, 2).toUpperCase()}
-</AvatarFallback>
-
+                        src={session.user.image ?? ""}
+                        alt={session.user.name ?? "User"}
+                      />
+                      <AvatarFallback className="rounded-lg bg-primary/10 text-primary">
+                        {(session.user.name ?? "U").slice(0, 2).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
@@ -139,13 +136,11 @@ alt={session.user.name ?? "User"}
                         </AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">
-<span className="truncate font-semibold">
-{user?.name ?? "User"}
-</span>
-<span className="truncate text-xs text-muted-foreground">
-{user?.email ?? ""}
-</span>
-
+                        <span className="truncate font-semibold">
+                          {user?.name ?? "User"}
+                        </span>
+                        <span className="truncate text-xs text-muted-foreground">
+                          {user?.email ?? ""}
                         </span>
                       </div>
                     </div>
@@ -153,10 +148,7 @@ alt={session.user.name ?? "User"}
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
-                      <Link
-                        href="/settings"
-                        className="cursor-pointer"
-                      >
+                      <Link href="/settings" className="cursor-pointer">
                         <SettingsIcon className="mr-2 size-4" />
                         Settings
                       </Link>
