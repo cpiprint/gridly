@@ -1,8 +1,8 @@
 import {
+  BotIcon,
   HandshakeIcon,
   LayoutDashboardIcon,
-  MessageSquareIcon,
-  SettingsIcon,
+  UserCog2Icon,
   ZapIcon,
 } from "lucide-react";
 import type { RadiusName, ThemeName } from "./lib/theme-presets";
@@ -33,7 +33,6 @@ export type {
   TechStackItem,
 };
 
-// ─── App ─────────────────────────────────────────────
 export const appConfig = {
   name: "Gridly",
   description: "The AI-native SaaS starter kit.",
@@ -45,11 +44,11 @@ export const appConfig = {
 
   // Change this to recolor the entire app.
   // Options: "orange" | "blue" | "violet" | "rose" | "emerald" | "amber"
-  theme: "orange" as ThemeName,
+  theme: "blue" as ThemeName,
 
   // Change this to adjust corner roundness globally.
   // Options: "sm" | "md" | "lg" | "xl"| " "(for rounded-none )
-  radius: "sm" as RadiusName,
+  radius: "lg" as RadiusName,
 } as const;
 
 // ─── Auth ────────────────────────────────────────────
@@ -77,34 +76,12 @@ export const authConfig = {
 // and used for Stripe checkout.
 export const plansConfig: Plan[] = [
   {
-    name: "Free",
-    description: "For side projects",
-    price: 0,
-    priceId: "",
+    name: "One Time",
+    description: "One time purchase",
+    price: 29,
+    priceId: "f89b5bf6-bcac-419d-a853-bb633253407f",
     cta: "Get Started",
-    features: ["1 project", "Basic AI", "Community support"],
-  },
-  {
-    name: "Pro",
-    description: "For serious builders",
-    price: 19,
-    priceId: "price_xxx", // buyer replaces with their Stripe Price ID
-    cta: "Upgrade to Pro",
-    features: [
-      "Unlimited projects",
-      "Advanced AI",
-      "Priority support",
-      "Custom domain",
-    ],
-    highlighted: true,
-  },
-  {
-    name: "Team",
-    description: "For growing teams",
-    price: 49,
-    priceId: "price_yyy",
-    cta: "Contact Sales",
-    features: ["Everything in Pro", "Team members", "Admin dashboard", "SLA"],
+    features: ["Unlimited Projects", " AI Features", "Community support"],
   },
 ];
 
@@ -284,7 +261,7 @@ export const dashboardConfig = {
   },
   nav: [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboardIcon },
-    { title: "AI Chat", url: "/ai", icon: MessageSquareIcon },
-    { title: "Settings", url: "/settings", icon: SettingsIcon },
+    { title: "AI Chat", url: "/ai", icon: BotIcon },
+    { title: "Settings", url: "/settings", icon: UserCog2Icon },
   ] satisfies NavItem[],
 };

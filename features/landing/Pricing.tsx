@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,8 +12,16 @@ import {
 import { Check, DollarSignIcon } from "lucide-react";
 import { plansConfig } from "@/config";
 import { cn } from "@/lib/utils";
+import { authClient } from "@/lib/auth-client";
 
 const Pricing = () => {
+  const handleCheckout = async (productId: string) => {
+    await authClient.checkout({
+      products: [productId],
+      
+    });
+  };
+
   return (
     <section className="container mx-auto max-w-4xl px-6 py-16 md:py-18 text-left border-x border-dashed border-b">
       <div className="text-left mb-16">
@@ -98,6 +108,7 @@ const Pricing = () => {
                 )}
                 size="lg"
                 variant={plan.highlighted ? "default" : "outline"}
+                onClick={() => handleCheckout(plan.priceId)}
               >
                 {plan.cta}
               </Button>
