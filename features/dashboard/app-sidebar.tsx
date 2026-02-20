@@ -139,11 +139,13 @@ alt={session.user.name ?? "User"}
                         </AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate font-semibold">
-                          {user?.name}
-                        </span>
-                        <span className="truncate text-xs text-muted-foreground">
-                          {user?.email}
+<span className="truncate font-semibold">
+{user?.name ?? "User"}
+</span>
+<span className="truncate text-xs text-muted-foreground">
+{user?.email ?? ""}
+</span>
+
                         </span>
                       </div>
                     </div>
