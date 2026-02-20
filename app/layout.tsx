@@ -1,12 +1,13 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
-import { Doto, Work_Sans } from "next/font/google";
+import { Doto, Geist } from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { appConfig } from "@/config";
 import { generateThemeCSS } from "@/lib/theme-presets";
+import { TRPCReactProvider } from "@/trpc/client";
 
-const workSans = Work_Sans({
+const workSans = Geist({
   subsets: ["latin"],
   variable: "--font-work-sans",
 });
@@ -74,14 +75,16 @@ export default function RootLayout({
         <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
       </head>
       <body className={`antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider>{children}</TooltipProvider>
-        </ThemeProvider>
+        <TRPCReactProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TooltipProvider>{children}</TooltipProvider>
+          </ThemeProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

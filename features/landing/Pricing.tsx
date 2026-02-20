@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,8 +12,20 @@ import {
 import { Check, DollarSignIcon } from "lucide-react";
 import { plansConfig } from "@/config";
 import { cn } from "@/lib/utils";
+import { authClient } from "@/lib/auth-client";
 
 const Pricing = () => {
+const handleCheckout = async (productId: string) => {
+try {
+await authClient.checkout({
+products: [productId],
+});
+} catch (error) {
+console.error("Checkout failed:", error);
+// TODO: Show user-friendly error message (toast/alert)
+}
+};
+
   return (
     <section className="container mx-auto max-w-4xl px-6 py-16 md:py-18 text-left border-x border-dashed border-b">
       <div className="text-left mb-16">
@@ -70,8 +84,11 @@ const Pricing = () => {
                 <span className="text-4xl font-bold font-doto tracking-tighter">
                   {plan.price === 0 ? "Free" : `$${plan.price}`}
                 </span>
-                {plan.price > 0 && (
+                {plan.price > 0 && plan.billingPeriod === "month" && (
                   <span className="text-muted-foreground text-sm">/month</span>
+                )}
+                {plan.price > 0 && plan.billingPeriod === "one_time" && (
+                  <span className="text-muted-foreground text-sm">one-time</span>
                 )}
               </div>
 
@@ -98,6 +115,7 @@ const Pricing = () => {
                 )}
                 size="lg"
                 variant={plan.highlighted ? "default" : "outline"}
+                onClick={() => handleCheckout(plan.productId)}
               >
                 {plan.cta}
               </Button>

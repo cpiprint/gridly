@@ -1,8 +1,8 @@
 import {
+  BotIcon,
   HandshakeIcon,
   LayoutDashboardIcon,
-  MessageSquareIcon,
-  SettingsIcon,
+  UserCog2Icon,
   ZapIcon,
 } from "lucide-react";
 import type { RadiusName, ThemeName } from "./lib/theme-presets";
@@ -19,6 +19,7 @@ import type {
   FAQItem,
   Feature,
   FooterLink,
+  LegalDocument,
   NavItem,
   Plan,
   TechStackItem,
@@ -28,12 +29,12 @@ export type {
   FAQItem,
   Feature,
   FooterLink,
+  LegalDocument,
   NavItem,
   Plan,
   TechStackItem,
 };
 
-// ─── App ─────────────────────────────────────────────
 export const appConfig = {
   name: "Gridly",
   description: "The AI-native SaaS starter kit.",
@@ -45,11 +46,11 @@ export const appConfig = {
 
   // Change this to recolor the entire app.
   // Options: "orange" | "blue" | "violet" | "rose" | "emerald" | "amber"
-  theme: "orange" as ThemeName,
+  theme: "blue" as ThemeName,
 
   // Change this to adjust corner roundness globally.
   // Options: "sm" | "md" | "lg" | "xl"| " "(for rounded-none )
-  radius: "sm" as RadiusName,
+  radius: "lg" as RadiusName,
 } as const;
 
 // ─── Auth ────────────────────────────────────────────
@@ -77,34 +78,14 @@ export const authConfig = {
 // and used for Stripe checkout.
 export const plansConfig: Plan[] = [
   {
-    name: "Free",
-    description: "For side projects",
-    price: 0,
-    priceId: "",
+    name: "One Time",
+    description: "One time purchase",
+    price: 29,
+    billingPeriod: "one_time",
+    slug: "one-time",
+    productId: "f89b5bf6-bcac-419d-a853-bb633253407f",
     cta: "Get Started",
-    features: ["1 project", "Basic AI", "Community support"],
-  },
-  {
-    name: "Pro",
-    description: "For serious builders",
-    price: 19,
-    priceId: "price_xxx", // buyer replaces with their Stripe Price ID
-    cta: "Upgrade to Pro",
-    features: [
-      "Unlimited projects",
-      "Advanced AI",
-      "Priority support",
-      "Custom domain",
-    ],
-    highlighted: true,
-  },
-  {
-    name: "Team",
-    description: "For growing teams",
-    price: 49,
-    priceId: "price_yyy",
-    cta: "Contact Sales",
-    features: ["Everything in Pro", "Team members", "Admin dashboard", "SLA"],
+    features: ["Unlimited Projects", " AI Features", "Community support"],
   },
 ];
 
@@ -276,6 +257,83 @@ export const landingConfig = {
   },
 };
 
+export const legalConfig: {
+  terms: LegalDocument;
+  privacy: LegalDocument;
+} = {
+  terms: {
+    title: "Terms of Service",
+    lastUpdated: "February 20, 2026",
+    intro:
+      "These terms govern your use of the service, including account responsibilities, acceptable use, and payment terms.",
+    sections: [
+      {
+        title: "Account Use",
+        body: [
+          "You are responsible for maintaining the security of your account credentials.",
+          "You must provide accurate account information and keep it up to date.",
+        ],
+      },
+      {
+        title: "Acceptable Use",
+        body: [
+          "Do not misuse the platform, including attempts to bypass security controls or disrupt service availability.",
+          "You are responsible for content and actions performed through your account.",
+        ],
+      },
+      {
+        title: "Billing and Refunds",
+        body: [
+          "Paid features are billed according to the selected plan terms shown at checkout.",
+          "Refund and cancellation terms are governed by the purchase flow and applicable payment provider policies.",
+        ],
+      },
+      {
+        title: "Service Changes",
+        body: [
+          "We may update features, pricing, or policies over time.",
+          "Material changes to these terms will be reflected by updating the last updated date.",
+        ],
+      },
+    ],
+  },
+  privacy: {
+    title: "Privacy Policy",
+    lastUpdated: "February 20, 2026",
+    intro:
+      "This policy describes what information we collect, how we use it, and the choices available to you.",
+    sections: [
+      {
+        title: "Information We Collect",
+        body: [
+          "We collect account details such as name, email, and profile metadata from your sign-in provider.",
+          "We also collect operational telemetry needed to secure and improve the service.",
+        ],
+      },
+      {
+        title: "How We Use Data",
+        body: [
+          "We use data to authenticate users, deliver features, process payments, and provide customer support.",
+          "We do not sell personal information.",
+        ],
+      },
+      {
+        title: "Data Retention",
+        body: [
+          "We retain information only as long as needed for service operations, legal obligations, and security requirements.",
+          "You may request account deletion according to available product controls and applicable law.",
+        ],
+      },
+      {
+        title: "Contact",
+        body: [
+          "For privacy-related requests, contact the email listed in your business profile or support channel.",
+        ],
+      },
+    ],
+  },
+};
+
 // ─── Dashboard ───────────────────────────────────────
 export const dashboardConfig = {
   sidebar: {
@@ -284,7 +342,7 @@ export const dashboardConfig = {
   },
   nav: [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboardIcon },
-    { title: "AI Chat", url: "/ai", icon: MessageSquareIcon },
-    { title: "Settings", url: "/settings", icon: SettingsIcon },
+    { title: "AI Chat", url: "/ai", icon: BotIcon },
+    { title: "Settings", url: "/settings", icon: UserCog2Icon },
   ] satisfies NavItem[],
 };

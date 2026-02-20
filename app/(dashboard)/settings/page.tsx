@@ -10,10 +10,23 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import prisma from "@/lib/db";
+import { plansConfig } from "@/config";
 
 export default async function SettingsPage() {
   const session = await requireAuth();
   const { user } = session;
+  const dbUser = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: {
+      planSlug: true,
+      planStatus: true,
+    },
+  });
+
+  const currentPlan =
+    plansConfig.find((plan) => plan.slug === dbUser?.planSlug)?.name ?? "Free";
+  const isActivePlan = dbUser?.planStatus === "active";
 
   const initials = user.name
     ? user.name
@@ -101,7 +114,12 @@ export default async function SettingsPage() {
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <p className="text-sm font-medium">Current Plan</p>
-                  <p className="text-sm text-muted-foreground">Free</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm text-muted-foreground">{currentPlan}</p>
+                    <Badge variant={isActivePlan ? "default" : "secondary"}>
+                      {isActivePlan ? "Active" : "Inactive"}
+                    </Badge>
+                  </div>
                 </div>
                 <Button variant="outline" size="sm" disabled>
                   Manage Billing

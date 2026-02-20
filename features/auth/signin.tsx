@@ -1,40 +1,48 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { authConfig } from "@/config";
-import Link from "next/link";
-import { useState } from "react";
-import { FaGoogle, FaGithub, FaDiscord } from "react-icons/fa";
-import type { IconType } from "react-icons";
 import { Spinner } from "@/components/ui/spinner";
+import { authConfig } from "@/config";
 import { signIn } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-// Provider display config — icon + label
-// Buyer can extend this when adding new providers
-const providerMeta: Record<string, { icon: IconType; label: string }> = {
+import { useState } from "react";
+import { FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
+import type { IconType } from "react-icons";
+import { z } from "zod";
+
+type AuthProvider = (typeof authConfig.auth.providers)[number];
+
+const callbackURLSchema = z
+  .string()
+  .startsWith("/")
+  .refine((value) => !value.startsWith("//"), {
+    message: "callbackURL must be a relative path",
+  });
+
+const providerMeta: Record<AuthProvider, { icon: IconType; label: string }> = {
   github: { icon: FaGithub, label: "GitHub" },
   google: { icon: FaGoogle, label: "Google" },
   discord: { icon: FaDiscord, label: "Discord" },
 };
 
 export function SignInForm({
+  enabledProviders,
   className,
   ...props
-}: React.ComponentProps<"form">) {
+}: React.ComponentProps<"form"> & { enabledProviders: AuthProvider[] }) {
   const { auth } = authConfig;
   const searchParams = useSearchParams();
   const callbackURLParam = searchParams.get("callbackURL");
-  const callbackURL =
-    callbackURLParam &&
-    callbackURLParam.startsWith("/") &&
-    !callbackURLParam.startsWith("//")
-      ? callbackURLParam
-      : auth.redirectAfterSignIn;
-  const [loading, setLoading] = useState<string | null>(null);
+  const callbackURL = callbackURLSchema.safeParse(callbackURLParam).success
+    ? callbackURLParam!
+    : auth.redirectAfterSignIn;
+
+  const [loading, setLoading] = useState<AuthProvider | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSignIn = async (provider: "github" | "google" | "discord") => {
+  const handleSignIn = async (provider: AuthProvider) => {
     setLoading(provider);
     setError(null);
     try {
@@ -51,7 +59,6 @@ export function SignInForm({
 
   return (
     <form className={cn("flex flex-col gap-8", className)} {...props}>
-      {/* Header */}
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-doto tracking-tight flex flex-col gap-1">
           <span className="text-primary flex items-center gap-3 font-bold">
@@ -70,20 +77,16 @@ export function SignInForm({
         </div>
       )}
 
-      {/* Social login buttons — driven by authConfig.providers */}
       <div className="flex flex-col gap-3">
-        {auth.providers.map((provider) => {
+        {enabledProviders.map((provider) => {
           const meta = providerMeta[provider];
-          if (!meta) return null;
           const Icon = meta.icon;
           const isProviderLoading = loading === provider;
 
           return (
             <Button
               key={provider}
-              onClick={() =>
-                handleSignIn(provider as "github" | "google" | "discord")
-              }
+              onClick={() => handleSignIn(provider)}
               disabled={!!loading}
               variant="outline"
               type="button"
@@ -101,7 +104,13 @@ export function SignInForm({
         })}
       </div>
 
-      {/* Footer note */}
+      {enabledProviders.length === 0 && (
+        <div className="bg-muted border border-dashed text-muted-foreground text-xs px-4 py-3 rounded-lg">
+          No auth providers are configured. Add OAuth credentials in your
+          environment to enable sign-in.
+        </div>
+      )}
+
       <p className="text-xs text-muted-foreground text-center leading-relaxed">
         By continuing, you agree to our{" "}
         <Link
