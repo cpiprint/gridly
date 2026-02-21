@@ -8,7 +8,8 @@ export type Plan = {
   price: number; // monthly price in USD, 0 = free
   billingPeriod: "month" | "one_time";
   slug: string;
-  productId: string; // Polar product ID
+  productId?: string; // Polar product ID
+  href?: string; // Optional URL to redirect to instead of checkout (for free/open-source)
   features: string[];
   cta: string;
   highlighted?: boolean; // "Most popular" badge

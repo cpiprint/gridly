@@ -84,8 +84,8 @@ export const plansConfig: Plan[] = [
     price: 0,
     billingPeriod: "one_time",
     slug: "one-time",
-    // ⚠️  Replace this with your own Polar product ID (found in your Polar dashboard)
-    productId: "f89b5bf6-bcac-419d-a853-bb633253407f",
+
+    href: "https://github.com/AdityaKodez/gridly", // Scalable redirect for free/open-source tiers
     cta: "Get Started",
     features: ["Unlimited Projects", " AI Features", "Community support"],
   },

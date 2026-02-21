@@ -9,10 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Check, DollarSignIcon } from "lucide-react";
-import { plansConfig, appConfig } from "@/config";
-import { cn } from "@/lib/utils";
+import { plansConfig } from "@/config";
 import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
+import { Check, DollarSignIcon } from "lucide-react";
 
 const Pricing = () => {
   const handleCheckout = async (productId: string) => {
@@ -37,7 +37,8 @@ const Pricing = () => {
           Pricing
         </h2>
         <p className="text-muted-foreground text-md max-w-2xl">
-        Our Code is open source unlike others selling their starters So that you can start building ur project sonner . 
+          Our Code is open source unlike others selling their starters So that
+          you can start building ur project sonner .
         </p>
       </div>
 
@@ -117,9 +118,9 @@ const Pricing = () => {
                 size="lg"
                 variant={plan.highlighted ? "default" : "outline"}
                 onClick={() => {
-                  if (plan.price === 0) {
-                    window.open(appConfig.github, "_blank");
-                  } else {
+                  if (plan.href) {
+                    window.open(plan.href, "_blank");
+                  } else if (plan.productId) {
                     handleCheckout(plan.productId);
                   }
                 }}
