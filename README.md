@@ -35,6 +35,7 @@ Auth, database, payments, AI chat, background jobs — fully wired.<br/>
 | **Email** | Resend — transactional email, ready to plug in |
 | **Background Jobs** | Inngest — queues, crons, step functions, zero infra |
 | **UI** | Shadcn/ui — accessible, themeable component system |
+| **UX** | Next.js App Router streaming + layout-matching loading skeletons |
 | **Landing Page** | Hero, Features, Pricing, Comparison, FAQ, Footer — all config-driven |
 | **Legal** | `/privacy` + `/terms` — editable from config |
 | **Config-Driven** | One `config.ts` to rename, reprice, retheme, and rebrand everything |

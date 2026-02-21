@@ -7,7 +7,7 @@ const { hero } = landingConfig;
 
 export const Hero = () => {
   return (
-    <section className="container mx-auto max-w-4xl px-6 py-16 md:py-18 text-left border-x border-dashed border-b">
+    <section className="container mx-auto max-w-4xl px-6 py-24 md:py-32 text-left border-x border-dashed border-b">
       <h1 className="text-3xl md:text-5xl tracking-tight mb-4 font-doto relative">
         <span className="whitespace-nowrap text-primary flex items-center gap-2">
           {hero.titleAccent}
