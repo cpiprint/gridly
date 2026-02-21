@@ -11,30 +11,30 @@ import { applyOrderPaidEntitlement } from "./billing";
 const authEnvSchema = z.object({
   BETTER_AUTH_SECRET: z.string().trim().min(1),
   BETTER_AUTH_URL: z.string().url(),
-  POLAR_ACCESS_TOKEN: z.string().trim().min(1),
-  POLAR_SUCCESS_URL: z.string().url(),
-  POLAR_WEBHOOK_SECRET: z.string().trim().min(1),
+  // Polar is optional — the app runs fine without payments configured.
+  POLAR_ACCESS_TOKEN: z.string().trim().min(1).optional(),
+  POLAR_SUCCESS_URL: z.string().url().optional(),
+  POLAR_WEBHOOK_SECRET: z.string().trim().min(1).optional(),
 });
 
 const authEnv = authEnvSchema.parse(process.env);
 const socialProviders = getEnabledSocialProvidersConfig();
 
-const polarClient = new Polar({
-  accessToken: authEnv.POLAR_ACCESS_TOKEN,
-  server: process.env.NODE_ENV === "production" ? "production" : "sandbox",
-});
+// Only wire up Polar when all three env vars are present.
+const hasPolar =
+  authEnv.POLAR_ACCESS_TOKEN &&
+  authEnv.POLAR_SUCCESS_URL &&
+  authEnv.POLAR_WEBHOOK_SECRET;
 
-export const auth = betterAuth({
-  // Explicit auth URL + trusted origin keeps origin and CSRF checks strict.
-  baseURL: authEnv.BETTER_AUTH_URL,
-  trustedOrigins: [authEnv.BETTER_AUTH_URL],
-  secret: authEnv.BETTER_AUTH_SECRET,
-  database: prismaAdapter(prisma, {
-    provider: "postgresql",
-    debugLogs: process.env.NODE_ENV !== "production",
-  }),
-  socialProviders,
-  plugins: [
+function buildPolarPlugin() {
+  if (!hasPolar) return [];
+
+  const polarClient = new Polar({
+    accessToken: authEnv.POLAR_ACCESS_TOKEN!,
+    server: process.env.NODE_ENV === "production" ? "production" : "sandbox",
+  });
+
+  return [
     polar({
       client: polarClient,
       createCustomerOnSignUp: true,
@@ -45,23 +45,33 @@ export const auth = betterAuth({
               ? [{ productId: plan.productId, slug: plan.slug }]
               : [],
           ),
-          successUrl: authEnv.POLAR_SUCCESS_URL,
+          successUrl: authEnv.POLAR_SUCCESS_URL!,
           authenticatedUsersOnly: true,
         }),
         webhooks({
-          // Signature verification is performed by the Polar plugin with this secret.
-          secret: authEnv.POLAR_WEBHOOK_SECRET,
+          secret: authEnv.POLAR_WEBHOOK_SECRET!,
           onOrderPaid: async (payload) => {
             try {
               await applyOrderPaidEntitlement(payload);
             } catch (error) {
               console.error("[Polar] Failed to apply order entitlement", error);
-              // Re-throw so Polar can retry webhook delivery.
               throw error;
             }
           },
         }),
       ],
     }),
-  ],
+  ];
+}
+
+export const auth = betterAuth({
+  baseURL: authEnv.BETTER_AUTH_URL,
+  trustedOrigins: [authEnv.BETTER_AUTH_URL],
+  secret: authEnv.BETTER_AUTH_SECRET,
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+    debugLogs: process.env.NODE_ENV !== "production",
+  }),
+  socialProviders,
+  plugins: [...buildPolarPlugin()],
 });
