@@ -43,20 +43,11 @@ export const metadata: Metadata = {
     title: appConfig.name,
     description: appConfig.description,
     siteName: appConfig.name,
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: appConfig.name,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: appConfig.name,
     description: appConfig.description,
-    images: ["/og-image.png"],
   },
 };
 
