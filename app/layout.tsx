@@ -76,12 +76,7 @@ export default function RootLayout({
       </head>
       <body className={`antialiased`}>
         <TRPCReactProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <TooltipProvider>{children}</TooltipProvider>
           </ThemeProvider>
         </TRPCReactProvider>

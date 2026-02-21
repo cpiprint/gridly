@@ -12,7 +12,7 @@ import {
   BrandTrpc,
   BrandTypeScript,
   PrismaIcon,
-  StripeIcon,
+  PolarIcon,
 } from "./public";
 import type {
   ComparisonRow,
@@ -40,6 +40,7 @@ export const appConfig = {
   name: "Gridly",
   description: "The AI-native SaaS starter kit.",
   url: "https://gridly.akoder.xyz",
+  github: "https://github.com/AdityaKodez/gridly",
   creator: {
     name: "Aditya",
     url: "https://akoder.xyz",
@@ -78,9 +79,9 @@ export const authConfig = {
 // Shown in pricing and used by Polar checkout.
 export const plansConfig: Plan[] = [
   {
-    name: "One Time",
-    description: "One time purchase",
-    price: 29,
+    name: "Free",
+    description: "Code is Open Source",
+    price: 0,
     billingPeriod: "one_time",
     slug: "one-time",
     // ⚠️  Replace this with your own Polar product ID (found in your Polar dashboard)
@@ -156,7 +157,7 @@ export const landingConfig = {
         "End-to-end type safety for your API. No more manual type synchronization.",
     },
     {
-      icon: StripeIcon,
+      icon: PolarIcon,
       title: "Polar",
       description:
         "Checkout, customer portal, and webhook handling are pre-configured with Polar.",
@@ -181,7 +182,7 @@ export const landingConfig = {
     rows: [
       {
         feature: "Price",
-        values: ["$29", "$199", "$99–299"],
+        values: ["$0 (Open Source)", "$199", "$99–$299"],
       },
       {
         feature: "Next.js App Router",
@@ -192,8 +193,8 @@ export const landingConfig = {
         values: [true, true, true],
       },
       {
-        feature: "Stripe Payments",
-        values: [true, true, true],
+        feature: "Polar Payments",
+        values: [true, false, false],
       },
       {
         feature: "Database + ORM",
@@ -205,10 +206,6 @@ export const landingConfig = {
       },
       {
         feature: "AI Tool Calling",
-        values: [true, false, false],
-      },
-      {
-        feature: "Background Jobs (Inngest)",
         values: [true, false, false],
       },
       {
@@ -224,29 +221,29 @@ export const landingConfig = {
 
   faq: [
     {
+      question: "Is this really 100% free and open-source?",
+      answer:
+        "Yes! Gridly is released under the MIT License. You can use it for personal projects, commercial client work, or your own SaaS startups completely for free.",
+    },
+    {
       question: "What is included in the boilerplate?",
       answer:
-        "A complete Next.js 15+ foundation with Better Auth, Prisma, PostgreSQL, Stripe integration, Resend for emails, and a clean feature-based architecture. Everything you need to go from idea to launch.",
+        "A complete Next.js 15+ foundation with Better Auth, Prisma, PostgreSQL, Polar integration, and the Vercel AI SDK. Everything you need to go from idea to launch without writing boilerplate.",
     },
     {
       question: "Can I use this for client projects?",
       answer:
-        "Yes! Once you purchase the starter, you can use it for as many projects as you like. It's a one-time purchase for lifetime usage.",
-    },
-    {
-      question: "Do I get lifetime updates?",
-      answer:
-        "Absolutely. You'll have access to all future updates, security patches, and new features we add to the boilerplate at no extra cost.",
+        "Absolutely. Once you clone the starter, you can use it for as many client projects as you like without attribution.",
     },
     {
       question: "Is the code well-documented?",
       answer:
-        "Yes, we provide clear documentation for setup, environment variables, database migrations, and Stripe configuration to ensure you're never stuck.",
+        "Yes, we provide clear documentation for setup, environment variables, database migrations, and authentication configuration in the repository's README.",
     },
     {
-      question: "What if I need help during setup?",
+      question: "Why Polar instead of Stripe?",
       answer:
-        "We provide priority email support for all customers. If you run into any technical issues during setup, we're here to help you get unstuck.",
+        "Polar is built specifically for developers, open-source maintainers, and modern SaaS companies. It handles subscriptions, products, and webhooks beautifully with a developer-first API.",
     },
   ] satisfies FAQItem[],
 

@@ -10,21 +10,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check, DollarSignIcon } from "lucide-react";
-import { plansConfig } from "@/config";
+import { plansConfig, appConfig } from "@/config";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
 
 const Pricing = () => {
-const handleCheckout = async (productId: string) => {
-try {
-await authClient.checkout({
-products: [productId],
-});
-} catch (error) {
-console.error("Checkout failed:", error);
-// TODO: Show user-friendly error message (toast/alert)
-}
-};
+  const handleCheckout = async (productId: string) => {
+    try {
+      await authClient.checkout({
+        products: [productId],
+      });
+    } catch (error) {
+      console.error("Checkout failed:", error);
+      // TODO: Show user-friendly error message (toast/alert)
+    }
+  };
 
   return (
     <section className="container mx-auto max-w-4xl px-6 py-16 md:py-18 text-left border-x border-dashed border-b">
@@ -37,8 +37,7 @@ console.error("Checkout failed:", error);
           Pricing
         </h2>
         <p className="text-muted-foreground text-md max-w-2xl">
-          Simple, transparent plans that scale with you. Start free, upgrade
-          when you&apos;re ready.
+        Our Code is open source unlike others selling their starters So that you can start building ur project sonner . 
         </p>
       </div>
 
@@ -88,7 +87,9 @@ console.error("Checkout failed:", error);
                   <span className="text-muted-foreground text-sm">/month</span>
                 )}
                 {plan.price > 0 && plan.billingPeriod === "one_time" && (
-                  <span className="text-muted-foreground text-sm">one-time</span>
+                  <span className="text-muted-foreground text-sm">
+                    one-time
+                  </span>
                 )}
               </div>
 
@@ -115,7 +116,13 @@ console.error("Checkout failed:", error);
                 )}
                 size="lg"
                 variant={plan.highlighted ? "default" : "outline"}
-                onClick={() => handleCheckout(plan.productId)}
+                onClick={() => {
+                  if (plan.price === 0) {
+                    window.open(appConfig.github, "_blank");
+                  } else {
+                    handleCheckout(plan.productId);
+                  }
+                }}
               >
                 {plan.cta}
               </Button>

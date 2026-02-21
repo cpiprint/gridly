@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, DatabaseIcon } from "lucide-react";
-import { landingConfig } from "@/config";
+import { appConfig, landingConfig } from "@/config";
 import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
 
 const { hero } = landingConfig;
 
@@ -16,16 +17,25 @@ export const Hero = () => {
         {hero.title}
       </h1>
 
-      <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mb-8">
-        {hero.subtitle}
-      </p>
-
-      <Link href="/sign-in" prefetch className="cursor-pointer">
-        <Button size="lg">
-          {hero.cta}
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </Link>
+      <div className="flex flex-col sm:flex-row gap-4 mb-8">
+        <Link href="/sign-in" prefetch className="cursor-pointer">
+          <Button size="lg" className="w-full sm:w-auto">
+            {hero.cta}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
+        <Link
+          href={appConfig.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer"
+        >
+          <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+            <FaGithub />
+            Star on GitHub
+          </Button>
+        </Link>
+      </div>
     </section>
   );
 };
