@@ -15,13 +15,8 @@ Auth, database, payments, AI chat, background jobs — fully wired.<br/>
 
 [Live Demo →](https://gridly.akoder.xyz) · [Quick Start →](#-quick-start) · [Buy Me a Coffee ☕](https://buymeacoffee.com/adikodez)
 
-<!-- 
-  🖼️ ADD YOUR SCREENSHOT HERE
-  Take a screenshot of your landing page and dashboard, upload to GitHub,
-  and uncomment the line below:
   
   ![Gridly Preview](public/preview.png) 
--->
 
 </div>
 
