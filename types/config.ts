@@ -24,7 +24,7 @@ export type NavItem = {
 
 // ─── Landing Page ────────────────────────────────────
 export type Feature = {
-  badge: string;
+  icon: LucideIcon;
   title: string;
   description: string;
   bullets: string[];

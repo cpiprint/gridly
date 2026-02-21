@@ -2,8 +2,10 @@ import {
   BotIcon,
   HandshakeIcon,
   LayoutDashboardIcon,
+  ShieldCheckIcon,
   UserCog2Icon,
   ZapIcon,
+  PaletteIcon,
 } from "lucide-react";
 import type { RadiusName, ThemeName } from "./lib/theme-presets";
 import {
@@ -11,8 +13,8 @@ import {
   BrandNextjs,
   BrandTrpc,
   BrandTypeScript,
-  PrismaIcon,
   PolarIcon,
+  PrismaIcon,
 } from "./public";
 import type {
   ComparisonRow,
@@ -79,31 +81,37 @@ export const authConfig = {
 // Shown in pricing and used by Polar checkout.
 export const plansConfig: Plan[] = [
   {
-    name: "Free",
-    description: "Code is Open Source",
+    name: "Open Source",
+    description: "The boilerplate you shouldn't have to pay for.",
     price: 0,
     billingPeriod: "one_time",
     slug: "one-time",
-
-    href: "https://github.com/AdityaKodez/gridly", // Scalable redirect for free/open-source tiers
-    cta: "Get Started",
-    features: ["Unlimited Projects", " AI Features", "Community support"],
+    highlighted: true,
+    href: "https://github.com/AdityaKodez/gridly",
+    cta: "Clone to your machine for $0",
+    features: [
+      "Auth & Database Wired",
+      "Stripe/Polar Payments",
+      "Vercel AI SDK Integration",
+      "Save 40+ hours of setup",
+      "100% MIT Licensed",
+    ],
   },
 ];
 
 // ─── Landing Page ────────────────────────────────────
 export const landingConfig = {
   hero: {
-    titleAccent: "Production-ready",
-    title: "Next.js SaaS boilerplate",
+    titleAccent: "The Premium SaaS Boilerplate.",
+    title: "Now 100% Free.",
     subtitle:
-      "Auth, database, payments, email, and clean architecture already set up. Start building real features immediately.",
-    cta: "Start shipping today",
+      "I got tired of seeing developers pay $200+ for Next.js starter kits. So I built one with Auth, Prisma, Polar payments, and AI integrations—and open-sourced it.",
+    cta: "Clone it for free",
   },
 
   features: [
     {
-      badge: "Authentication",
+      icon: ShieldCheckIcon,
       title: "Secure login in minutes, not days",
       description:
         "Pre-configured social logins, email/password, and session management. Just add your provider keys and you're live.",
@@ -114,18 +122,7 @@ export const landingConfig = {
       ],
     },
     {
-      badge: "Payments",
-      title: "Start charging from day one",
-      description:
-        "Stripe Checkout, subscription management, and webhooks are fully wired. Create plans in config and go.",
-      bullets: [
-        "Subscription & one-time payments",
-        "Customer portal built in",
-        "Webhook handlers ready",
-      ],
-    },
-    {
-      badge: "AI-Native",
+      icon: BotIcon,
       title: "Built for the AI era",
       description:
         "Vercel AI SDK integrated with streaming, tool calling, and chat UI. Ship AI features as fast as CRUD.",
@@ -133,6 +130,17 @@ export const landingConfig = {
         "Streaming chat interface",
         "Tool calling framework",
         "Multi-provider support",
+      ],
+    },
+    {
+      icon: PaletteIcon,
+      title: "Beautifully Crafted UI",
+      description:
+        "Built on TailwindCSS and shadcn/ui. Every component is completely customizable. Instantly toggle between stunning color palettes and dynamic border radiuses.",
+      bullets: [
+        "One-click theme switching",
+        "Geist Pixel Grid typography",
+        "Responsive Dashboard layouts",
       ],
     },
   ] satisfies Feature[],
@@ -182,7 +190,7 @@ export const landingConfig = {
     rows: [
       {
         feature: "Price",
-        values: ["$0 (Open Source)", "$199", "$99–$299"],
+        values: ["$0 (MIT License)", "$199", "$99–$299"],
       },
       {
         feature: "Next.js App Router",

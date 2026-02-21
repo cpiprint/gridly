@@ -37,8 +37,9 @@ const Pricing = () => {
           Pricing
         </h2>
         <p className="text-muted-foreground text-md max-w-2xl">
-          Our Code is open source unlike others selling their starters So that
-          you can start building ur project sonner .
+          I got tired of seeing developers pay $200+ for Next.js boilerplates
+          with fewer features than this. Gridly is 100% open-source and free
+          forever. Clone it, build your SaaS, and keep your money.
         </p>
       </div>
 
