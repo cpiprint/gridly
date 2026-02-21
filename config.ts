@@ -83,6 +83,7 @@ export const plansConfig: Plan[] = [
     price: 29,
     billingPeriod: "one_time",
     slug: "one-time",
+    // ⚠️  Replace this with your own Polar product ID (found in your Polar dashboard)
     productId: "f89b5bf6-bcac-419d-a853-bb633253407f",
     cta: "Get Started",
     features: ["Unlimited Projects", " AI Features", "Community support"],
@@ -180,7 +181,7 @@ export const landingConfig = {
     rows: [
       {
         feature: "Price",
-        values: ["$19", "$199", "$99–299"],
+        values: ["$29", "$199", "$99–299"],
       },
       {
         feature: "Next.js App Router",
