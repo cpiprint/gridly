@@ -35,7 +35,7 @@ export const Highlights = () => {
               className={cn("space-y-5", i % 2 === 1 && "md:[direction:ltr]")}
             >
               <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest font-doto text-primary bg-primary/10 border border-primary/20">
-                {feature.badge}
+                {feature.bullets}
               </span>
 
               <h3 className="text-2xl font-semibold tracking-tight leading-tight">
@@ -84,7 +84,7 @@ export const Highlights = () => {
                 ))}
               </div>
               <span className="absolute bottom-3 right-3 text-[10px] font-doto uppercase tracking-widest text-muted-foreground/50">
-                {feature.badge}
+                {feature.title}
               </span>
             </div>
           </div>
