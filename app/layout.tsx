@@ -1,20 +1,20 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import type { Metadata } from "next";
-import { Doto, Geist } from "next/font/google";
-import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { appConfig } from "@/config";
 import { generateThemeCSS } from "@/lib/theme-presets";
 import { TRPCReactProvider } from "@/trpc/client";
-
+import { GeistPixelSquare } from "geist/font/pixel";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 const workSans = Geist({
   subsets: ["latin"],
   variable: "--font-work-sans",
 });
 
-const doto = Doto({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-doto-family",
+  variable: "--font-geist-mono",
 });
 
 const themeCSS = generateThemeCSS(appConfig.theme, appConfig.radius);
@@ -68,10 +68,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${workSans.variable} ${doto.variable}`}
+      className={`${workSans.variable} ${geistMono.variable} ${GeistPixelSquare.variable}`}
       suppressHydrationWarning
     >
-      <head>
+      <head suppressHydrationWarning>
         <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
       </head>
       <body className={`antialiased`}>

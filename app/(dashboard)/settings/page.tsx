@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/db";
 import { plansConfig } from "@/config";
+import { ManageBillingButton } from "@/features/dashboard/manage-billing-button";
 
 export default async function SettingsPage() {
   const session = await requireAuth();
@@ -115,15 +116,15 @@ export default async function SettingsPage() {
                 <div className="space-y-1">
                   <p className="text-sm font-medium">Current Plan</p>
                   <div className="flex items-center gap-2">
-                    <p className="text-sm text-muted-foreground">{currentPlan}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {currentPlan}
+                    </p>
                     <Badge variant={isActivePlan ? "default" : "secondary"}>
                       {isActivePlan ? "Active" : "Inactive"}
                     </Badge>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" disabled>
-                  Manage Billing
-                </Button>
+                <ManageBillingButton />
               </div>
             </CardContent>
           </Card>

@@ -18,7 +18,9 @@ export default async function DashboardLayout({
   return (
     <SidebarProvider style={sidebarStyle}>
       <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset>
+        <div className="flex flex-col h-svh">{children}</div>
+      </SidebarInset>
     </SidebarProvider>
   );
 }

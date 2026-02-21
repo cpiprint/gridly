@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, DatabaseIcon } from "lucide-react";
 import { landingConfig } from "@/config";
+import Link from "next/link";
 
 const { hero } = landingConfig;
 
@@ -19,10 +20,12 @@ export const Hero = () => {
         {hero.subtitle}
       </p>
 
-      <Button size="lg">
-        {hero.cta}
-        <ArrowRight className="ml-2 h-4 w-4" />
-      </Button>
+      <Link href="/sign-in" prefetch className="cursor-pointer">
+        <Button size="lg">
+          {hero.cta}
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      </Link>
     </section>
   );
 };
