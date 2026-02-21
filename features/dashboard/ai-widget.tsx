@@ -15,7 +15,7 @@ const QUICK_PROMPTS = ["Who am I logged in as?", "What's the current time?"];
 const chatTransport = new DefaultChatTransport({ api: "/api/ai/chat" });
 
 export function AiWidget() {
-  const { messages, sendMessage, status } = useChat({
+  const { messages, sendMessage, status, error, clearError } = useChat({
     transport: chatTransport,
   });
 
@@ -27,6 +27,9 @@ export function AiWidget() {
   function handleSend(text?: string) {
     const msg = (text ?? input).trim();
     if (!msg || isStreaming) return;
+    if (error) {
+      clearError();
+    }
     sendMessage({ text: msg });
     setInput("");
     setTimeout(
@@ -137,6 +140,11 @@ export function AiWidget() {
             )}
           </Button>
         </div>
+        {error && (
+          <p className="mt-2 rounded-md border border-destructive/30 bg-destructive/10 px-2.5 py-1.5 text-[11px] text-destructive">
+            {error.message}
+          </p>
+        )}
       </div>
     </div>
   );

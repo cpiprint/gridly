@@ -3,29 +3,31 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { appConfig } from "@/config";
 import { generateThemeCSS } from "@/lib/theme-presets";
 import { TRPCReactProvider } from "@/trpc/client";
+import { GeistMono } from "geist/font/mono";
 import { GeistPixelSquare } from "geist/font/pixel";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-const workSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-work-sans",
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-});
 
 const themeCSS = generateThemeCSS(appConfig.theme, appConfig.radius);
 
 export const metadata: Metadata = {
-  title: appConfig.name,
+  title: {
+    default: appConfig.name,
+    template: `%s | ${appConfig.name}`,
+  },
   description: appConfig.description,
+  metadataBase: new URL(appConfig.url),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: "/icon.svg",
   },
-  metadataBase: new URL(appConfig.url),
   authors: [{ name: appConfig.creator.name, url: appConfig.creator.url }],
   keywords: [
     "SaaS",
@@ -43,11 +45,15 @@ export const metadata: Metadata = {
     title: appConfig.name,
     description: appConfig.description,
     siteName: appConfig.name,
+    type: "website",
+    url: appConfig.url,
+    images: [{ url: "/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
     title: appConfig.name,
     description: appConfig.description,
+    images: ["/opengraph-image"],
   },
 };
 
@@ -59,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${workSans.variable} ${geistMono.variable} ${GeistPixelSquare.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable}`}
       suppressHydrationWarning
     >
       <head suppressHydrationWarning>

@@ -3,6 +3,10 @@ import "server-only";
 import { google } from "@ai-sdk/google";
 import { appConfig } from "@/config";
 
+export const isAIConfigured = Boolean(
+  process.env.GOOGLE_GENERATIVE_AI_API_KEY?.trim(),
+);
+
 /**
  * The shared AI model instance.
  * Switch provider by changing the model string or swapping the import.

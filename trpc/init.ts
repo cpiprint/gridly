@@ -1,10 +1,11 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import { cache } from "react";
 import superjson from "superjson";
-import { auth } from "@/lib/auth"; // Your better-auth server config
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import prisma from "@/lib/db";
 
+// Request-scoped context. `cache` ensures this is created once per request.
 export const createTRPCContext = cache(async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -45,7 +46,8 @@ export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
 
   return next({
     ctx: {
-      // Infers the `session` as non-nullable
+      ...ctx,
+      // Session is now non-null for downstream protected procedures.
       session: ctx.session,
     },
   });

@@ -1,14 +1,14 @@
 import type { LucideIcon } from "lucide-react";
 import type { ComponentType } from "react";
 
-// ─── Stripe / Plans ──────────────────────────────────
+// Plans (Polar product mapping)
 export type Plan = {
   name: string;
   description: string;
   price: number; // monthly price in USD, 0 = free
   billingPeriod: "month" | "one_time";
   slug: string;
-  productId: string; // Polar Product ID
+  productId: string; // Polar product ID
   features: string[];
   cta: string;
   highlighted?: boolean; // "Most popular" badge
@@ -30,7 +30,7 @@ export type Feature = {
 };
 
 export type TechStackItem = {
-  icon: ComponentType<{ size: number | string }>;
+  icon: ComponentType<{ size: string }>;
   title: string;
   description: string;
 };

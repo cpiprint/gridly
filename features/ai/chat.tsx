@@ -20,7 +20,7 @@ const chatTransport = new DefaultChatTransport({
 });
 
 export function Chat() {
-  const { messages, sendMessage, status } = useChat({
+  const { messages, sendMessage, status, error, clearError } = useChat({
     transport: chatTransport,
   });
 
@@ -45,6 +45,9 @@ export function Chat() {
   function handleSend() {
     const text = input.trim();
     if (!text || isStreaming) return;
+    if (error) {
+      clearError();
+    }
     sendMessage({ text });
     setInput("");
   }
@@ -150,6 +153,11 @@ export function Chat() {
               )}
             </Button>
           </div>
+          {error && (
+            <p className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-xs text-destructive">
+              {error.message}
+            </p>
+          )}
 
           <p className="text-center text-[11px] text-muted-foreground/60">
             AI may make mistakes. Please verify important info.

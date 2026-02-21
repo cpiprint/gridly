@@ -34,7 +34,7 @@ export const Features = () => {
           >
             <CardHeader className="space-y-4">
               <div className="text-muted-foreground group-hover:text-primary transition-colors flex items-center h-8">
-                <feature.icon size={34} />
+                <feature.icon size="34" />
               </div>
               <div className="space-y-1">
                 <CardTitle className="text-lg font-medium">

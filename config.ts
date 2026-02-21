@@ -11,7 +11,7 @@ import {
   BrandNextjs,
   BrandTrpc,
   BrandTypeScript,
-  InngestIcon,
+  PrismaIcon,
   StripeIcon,
 } from "./public";
 import type {
@@ -35,6 +35,7 @@ export type {
   TechStackItem,
 };
 
+// Global app metadata used by layouts, SEO, and branding UI.
 export const appConfig = {
   name: "Gridly",
   description: "The AI-native SaaS starter kit.",
@@ -73,9 +74,8 @@ export const authConfig = {
   },
 } as const;
 
-// ─── Stripe / Plans ──────────────────────────────────
-// SaaS subscription plans — shown on landing page pricing section
-// and used for Stripe checkout.
+// Plans (Polar product mapping)
+// Shown in pricing and used by Polar checkout.
 export const plansConfig: Plan[] = [
   {
     name: "One Time",
@@ -157,9 +157,9 @@ export const landingConfig = {
     },
     {
       icon: StripeIcon,
-      title: "Stripe",
+      title: "Polar",
       description:
-        "Stripe Checkout, Customer Portal, and webhooks pre-configured. Start charging in minutes.",
+        "Checkout, customer portal, and webhook handling are pre-configured with Polar.",
     },
     {
       icon: BetterAuth,
@@ -168,10 +168,10 @@ export const landingConfig = {
         "GitHub, Google, Discord — pre-wired with Better Auth. Secure sessions out of the box.",
     },
     {
-      icon: InngestIcon,
-      title: "Inngest",
+      icon: PrismaIcon,
+      title: "Prisma",
       description:
-        "Background jobs, cron jobs, and event-driven workflows. No infra to manage.",
+        "Type-safe database access with schema migrations for reliable production deployments.",
     },
   ] satisfies TechStackItem[],
 

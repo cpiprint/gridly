@@ -32,8 +32,6 @@ Auth, database, payments, AI chat, background jobs — fully wired.<br/>
 | **AI Chat** | Vercel AI SDK — streaming, tool calling, multi-step agents |
 | **Database** | Prisma + PostgreSQL (Neon-ready), typed queries |
 | **API** | tRPC — end-to-end type safety, no REST boilerplate |
-| **Email** | Resend — transactional email, ready to plug in |
-| **Background Jobs** | Inngest — queues, crons, step functions, zero infra |
 | **UI** | Shadcn/ui — accessible, themeable component system |
 | **UX** | Next.js App Router streaming + layout-matching loading skeletons |
 | **Landing Page** | Hero, Features, Pricing, Comparison, FAQ, Footer — all config-driven |
@@ -96,8 +94,6 @@ Landing page copy, pricing plans, auth providers, dashboard nav, legal pages —
 | `DISCORD_CLIENT_ID/SECRET` | OAuth | [Discord Developer Portal](https://discord.com/developers) |
 | `POLAR_ACCESS_TOKEN` | Payments | [Polar](https://polar.sh) → Settings → API Keys |
 | `POLAR_WEBHOOK_SECRET` | Payments | Polar webhook settings |
-| `RESEND_API_KEY` | Email | [Resend](https://resend.com) |
-| `INNGEST_EVENT_KEY` | Jobs | [Inngest](https://inngest.com) — optional in dev |
 
 Only enable the OAuth providers you add keys for — the sign-in page adapts automatically.
 
@@ -108,7 +104,7 @@ Only enable the OAuth providers you add keys for — the sign-in page adapts aut
 1. Create a product at [polar.sh](https://polar.sh)
 2. Copy the **Product ID** into `config.ts` → `plansConfig[n].productId`
 3. Add `POLAR_ACCESS_TOKEN` + `POLAR_WEBHOOK_SECRET` to `.env`
-4. Point webhook to `https://yourdomain.com/api/polar/webhook`
+4. Point webhook to `https://yourdomain.com/api/auth/polar/webhooks`
 
 ---
 
@@ -138,9 +134,9 @@ The model calls tools automatically when relevant. Return plain JSON only.
 app/
 ├── (dashboard)/        # Protected app pages (dashboard, settings, AI chat)
 ├── (marketing)/        # Public landing page
-└── api/                # API routes (AI, webhooks, tRPC, Inngest)
+└── api/                # API routes (AI, auth, tRPC)
 features/               # Feature modules (ai, auth, dashboard, landing)
-lib/                    # Server utilities (auth, db, ai, email)
+lib/                    # Server utilities (auth, db, ai, billing)
 trpc/                   # tRPC routers + init
 prisma/                 # Schema + migrations
 config.ts               # Single config for the entire app
@@ -168,8 +164,6 @@ Push to GitHub → Import in Vercel → Add env vars → Deploy.
 | [Better Auth](https://better-auth.com) | OAuth, sessions, protected routes |
 | [Polar](https://polar.sh) | Payments, subscriptions, webhooks |
 | [Vercel AI SDK](https://sdk.vercel.ai) | Streaming AI, tool calling |
-| [Inngest](https://inngest.com) | Background jobs, no infra |
-| [Resend](https://resend.com) | Transactional email |
 | [Shadcn/ui](https://ui.shadcn.com) | Accessible, customizable components |
 
 ---

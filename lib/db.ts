@@ -1,14 +1,12 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/lib/generated/prisma/client";
-import dotenv from "dotenv";
+import { z } from "zod";
 
-dotenv.config();
+const databaseEnvSchema = z.object({
+  DATABASE_URL: z.string().trim().min(1),
+});
 
-const connectionString = process.env.DATABASE_URL as string;
-
-if (!connectionString) {
-  throw new Error("DATABASE_URL is not defined");
-}
+const { DATABASE_URL: connectionString } = databaseEnvSchema.parse(process.env);
 
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
