@@ -148,7 +148,7 @@ export const landingConfig = {
   techStack: [
     {
       icon: BrandNextjs,
-      title: "Next.js 15",
+      title: "Next.js 16",
       description:
         "App Router, Server Actions, and Partial Prerendering. The fastest way to build for the web.",
     },
@@ -236,7 +236,7 @@ export const landingConfig = {
     {
       question: "What is included in the boilerplate?",
       answer:
-        "A complete Next.js 15+ foundation with Better Auth, Prisma, PostgreSQL, Polar integration, and the Vercel AI SDK. Everything you need to go from idea to launch without writing boilerplate.",
+        "A complete Next.js 16+ foundation with Better Auth, Prisma, PostgreSQL, Polar integration, and the Vercel AI SDK. Everything you need to go from idea to launch without writing boilerplate.",
     },
     {
       question: "Can I use this for client projects?",
