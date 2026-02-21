@@ -149,7 +149,7 @@ types/                  # Shared TypeScript types
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-Push to GitHub → Import in Vercel → Add env vars → Deploy.
+For a complete, step-by-step walkthrough of deploying Gridly to Vercel with a Neon Postgres database and all API keys, **👉 [read the Deployment Guide](DEPLOYMENT.md)**.
 
 ---
 
