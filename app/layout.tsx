@@ -69,7 +69,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head suppressHydrationWarning>
-        <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
+        <style
+          dangerouslySetInnerHTML={{ __html: themeCSS }}
+          suppressHydrationWarning
+        />
       </head>
       <body className={`antialiased`}>
         <TRPCReactProvider>

@@ -47,7 +47,7 @@ export const appConfig = {
 
   // Change this to recolor the entire app.
   // Options: "orange" | "blue" | "violet" | "rose" | "emerald" | "amber"
-  theme: "blue" as ThemeName,
+  theme: "orange" as ThemeName,
 
   // Change this to adjust corner roundness globally.
   // Options: "sm" | "md" | "lg" | "xl"| " "(for rounded-none )
