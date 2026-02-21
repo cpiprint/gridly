@@ -40,10 +40,11 @@ export const auth = betterAuth({
       createCustomerOnSignUp: true,
       use: [
         checkout({
-          products: plansConfig.map((plan) => ({
-            productId: plan.productId,
-            slug: plan.slug,
-          })),
+          products: plansConfig.flatMap((plan) =>
+            plan.productId
+              ? [{ productId: plan.productId, slug: plan.slug }]
+              : [],
+          ),
           successUrl: authEnv.POLAR_SUCCESS_URL,
           authenticatedUsersOnly: true,
         }),
