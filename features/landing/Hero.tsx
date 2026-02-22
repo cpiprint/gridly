@@ -10,7 +10,7 @@ export const Hero = () => {
   return (
     <section className="container mx-auto max-w-6xl px-6 py-24 md:py-32 text-left border-x border-dashed border-b">
       <h1 className="text-4xl md:text-6xl tracking-tight font-medium relative">
-        <span className="text-primary inline-flex items-center gap-2 font-doto">
+        <span className="text-primary inline-flex items-center gap-2">
           {hero.titleAccent}
           <DatabaseIcon className="size-8 md:size-10 text-primary fill-primary/30" />
         </span>

@@ -29,7 +29,7 @@ const Pricing = () => {
   return (
     <section className="container mx-auto max-w-6xl px-6 py-16 md:py-18 text-left border-x border-dashed border-b">
       <div className="text-left mb-16">
-        <h2 className="text-3xl font-medium tracking-tight mb-4 font-doto">
+        <h2 className="text-3xl font-semibold tracking-tight mb-4">
           <span className="whitespace-nowrap flex items-center gap-2">
             Transparent
             <DollarSignIcon className="size-8 fill-primary/30 text-primary" />
@@ -66,13 +66,13 @@ const Pricing = () => {
             )}
           >
             {plan.highlighted && (
-              <div className="absolute top-0 right-0 px-3 py-1 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest font-doto">
+              <div className="absolute top-0 right-0 px-3 py-1 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest">
                 Most Popular
               </div>
             )}
 
             <CardHeader>
-              <CardTitle className="font-doto uppercase tracking-wider text-sm text-primary">
+              <CardTitle className="uppercase tracking-wider text-sm text-primary font-semibold">
                 {plan.name}
               </CardTitle>
               <CardDescription className="text-sm mt-1">
@@ -82,7 +82,7 @@ const Pricing = () => {
 
             <CardContent className="space-y-6 flex-1">
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold font-doto tracking-tighter">
+                <span className="text-4xl font-bold tracking-tight">
                   {plan.price === 0 ? "Free" : `$${plan.price}`}
                 </span>
                 {plan.price > 0 && plan.billingPeriod === "month" && (

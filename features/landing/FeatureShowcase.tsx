@@ -9,7 +9,7 @@ export const FeatureShowcase = () => {
   return (
     <section className="container mx-auto max-w-6xl px-6 py-18 md:py-24 text-left border-x border-dashed border-b overflow-hidden">
       <div className="text-left mb-8 relative">
-        <h2 className="text-3xl font-medium tracking-tight mb-4 font-doto">
+        <h2 className="text-3xl font-semibold tracking-tight mb-4">
           <span className="whitespace-nowrap flex items-center gap-2">
             Core
             <BoxesIcon className="size-8 fill-primary/30 text-primary" />
@@ -39,7 +39,7 @@ export const FeatureShowcase = () => {
               <div className="mb-6 inline-flex items-center justify-center  p-3 text-primary w-fit">
                 <feature.icon className="size-6" />
               </div>
-              <h3 className="text-2xl font-bold mb-3 tracking-tight font-doto">
+              <h3 className="text-2xl font-bold mb-3 tracking-tight">
                 {feature.title}
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed grow">

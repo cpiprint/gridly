@@ -36,6 +36,14 @@ export type TechStackItem = {
   description: string;
 };
 
+// Used by the optional Highlights.tsx zigzag layout (alternative to FeatureShowcase).
+export type Highlight = {
+  badge: string;
+  title: string;
+  description: string;
+  bullets: string[];
+};
+
 export type ComparisonRow = {
   feature: string;
   values: [boolean | string, boolean | string, ...(boolean | string)[]];

@@ -2,13 +2,18 @@ import { Check, SparklesIcon } from "lucide-react";
 import { landingConfig } from "@/config";
 import { cn } from "@/lib/utils";
 
-const { features } = landingConfig;
+const { highlights } = landingConfig;
+
+// ─── Alternative to <FeatureShowcase /> ───────────────
+// Zigzag layout: each highlight gets a full-width row
+// with text on one side and a visual placeholder on the other.
+// To use: swap <FeatureShowcase /> for <Highlights /> in app/(marketing)/page.tsx
 
 export const Highlights = () => {
   return (
     <section className="container mx-auto max-w-6xl border-x border-dashed px-6 py-24 border-b">
       <div className="text-left mb-16">
-        <h2 className="text-3xl font-medium tracking-tight mb-4 font-doto">
+        <h2 className="text-3xl font-semibold tracking-tight mb-4">
           <span className="whitespace-nowrap flex items-center gap-2">
             Why
             <SparklesIcon className="size-8 fill-primary/30 text-primary" />
@@ -22,7 +27,7 @@ export const Highlights = () => {
       </div>
 
       <div className="space-y-16 md:space-y-24">
-        {features.map((feature, i) => (
+        {highlights.map((highlight, i) => (
           <div
             key={i}
             className={cn(
@@ -34,20 +39,20 @@ export const Highlights = () => {
             <div
               className={cn("space-y-5", i % 2 === 1 && "md:[direction:ltr]")}
             >
-              <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest font-doto text-primary bg-primary/10 border border-primary/20">
-                {feature.bullets}
+              <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 border border-primary/20">
+                {highlight.badge}
               </span>
 
               <h3 className="text-2xl font-semibold tracking-tight leading-tight">
-                {feature.title}
+                {highlight.title}
               </h3>
 
               <p className="text-muted-foreground leading-relaxed">
-                {feature.description}
+                {highlight.description}
               </p>
 
               <ul className="space-y-2.5 pt-1">
-                {feature.bullets.map((bullet, j) => (
+                {highlight.bullets.map((bullet, j) => (
                   <li
                     key={j}
                     className="flex items-center gap-3 text-sm text-muted-foreground"
@@ -59,14 +64,13 @@ export const Highlights = () => {
               </ul>
             </div>
 
-            {/* Visual side */}
+            {/* Visual side — replace with actual screenshots or illustrations */}
             <div
               className={cn(
                 "relative aspect-4/3 bg-muted/30 border border-border/50 overflow-hidden flex items-center justify-center group",
                 i % 2 === 1 && "md:[direction:ltr]",
               )}
             >
-              {/* Placeholder visual — replace with screenshots or illustrations */}
               <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent" />
               <div className="relative grid grid-cols-3 gap-3 p-8 opacity-40 group-hover:opacity-60 transition-opacity">
                 {Array.from({ length: 9 }).map((_, k) => (
@@ -83,8 +87,8 @@ export const Highlights = () => {
                   />
                 ))}
               </div>
-              <span className="absolute bottom-3 right-3 text-[10px] font-doto uppercase tracking-widest text-muted-foreground/50">
-                {feature.title}
+              <span className="absolute bottom-3 right-3 text-[10px] uppercase tracking-widest text-muted-foreground/50">
+                {highlight.badge}
               </span>
             </div>
           </div>

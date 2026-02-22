@@ -21,6 +21,7 @@ import type {
   FAQItem,
   Feature,
   FooterLink,
+  Highlight,
   LegalDocument,
   NavItem,
   Plan,
@@ -31,6 +32,7 @@ export type {
   FAQItem,
   Feature,
   FooterLink,
+  Highlight,
   LegalDocument,
   NavItem,
   Plan,
@@ -139,11 +141,50 @@ export const landingConfig = {
         "Built on TailwindCSS and shadcn/ui. Every component is completely customizable. Instantly toggle between stunning color palettes and dynamic border radiuses.",
       bullets: [
         "One-click theme switching",
-        "Geist Pixel Grid typography",
+        "Modern Geist typography",
         "Responsive Dashboard layouts",
       ],
     },
   ] satisfies Feature[],
+
+  // ─── Highlights (optional zigzag layout) ─────────────
+  // Swap <FeatureShowcase /> for <Highlights /> in app/(marketing)/page.tsx
+  // to use this alternate layout instead of the card grid.
+  highlights: [
+    {
+      badge: "Authentication",
+      title: "Secure login in minutes, not days",
+      description:
+        "Pre-configured social logins, email/password, and session management. Just add your provider keys and you're live.",
+      bullets: [
+        "Google, GitHub, Discord OAuth",
+        "Secure session handling",
+        "Protected routes & middleware",
+      ],
+    },
+    {
+      badge: "AI Native",
+      title: "Built for the AI era",
+      description:
+        "Vercel AI SDK integrated with streaming, tool calling, and chat UI. Ship AI features as fast as CRUD.",
+      bullets: [
+        "Streaming chat interface",
+        "Tool calling framework",
+        "Multi-provider support",
+      ],
+    },
+    {
+      badge: "Theming",
+      title: "Beautifully crafted UI",
+      description:
+        "Built on TailwindCSS and shadcn/ui. Every component is fully customizable. Toggle between color palettes and border radiuses instantly.",
+      bullets: [
+        "One-click theme switching",
+        "Modern Geist typography",
+        "Responsive Dashboard layouts",
+      ],
+    },
+  ] satisfies Highlight[],
 
   techStack: [
     {
