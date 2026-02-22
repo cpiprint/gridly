@@ -8,7 +8,7 @@ import { GeistPixelSquare } from "geist/font/pixel";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { Analytics } from "@vercel/analytics/next"
 const themeCSS = generateThemeCSS(appConfig.theme, appConfig.radius);
 
 export const metadata: Metadata = {
@@ -80,6 +80,7 @@ export default function RootLayout({
             <TooltipProvider>{children}</TooltipProvider>
           </ThemeProvider>
         </TRPCReactProvider>
+        <Analytics/>
       </body>
     </html>
   );
