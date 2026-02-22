@@ -11,7 +11,7 @@ export default function SignInPage() {
   return (
     <main className="h-svh bg-background">
       {/* Sign-in content area */}
-      <div className="container mx-auto max-w-4xl border-x border-dashed border-b h-full">
+      <div className="container mx-auto max-w-6xl border-x border-dashed border-b h-full">
         <div className="grid md:grid-cols-2 size-full">
           {/* Left panel — branding */}
           <div className="hidden md:flex flex-col justify-between p-10 border-r border-dashed">

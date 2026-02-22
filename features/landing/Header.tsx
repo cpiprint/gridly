@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 export const Header = () => {
   return (
-    <div className="container mx-auto max-w-4xl px-6 h-14 border-b border-dashed border-x flex justify-between items-center">
+    <div className="container mx-auto max-w-6xl px-6 h-14 border-b border-dashed border-x flex justify-between items-center">
       <Link href="/" className="flex items-center gap-2 group" prefetch>
         <GridlyLogo
           size={18}

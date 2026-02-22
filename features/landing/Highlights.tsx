@@ -6,7 +6,7 @@ const { features } = landingConfig;
 
 export const Highlights = () => {
   return (
-    <section className="container mx-auto max-w-4xl border-x border-dashed px-6 py-24 border-b">
+    <section className="container mx-auto max-w-6xl border-x border-dashed px-6 py-24 border-b">
       <div className="text-left mb-16">
         <h2 className="text-3xl font-medium tracking-tight mb-4 font-doto">
           <span className="whitespace-nowrap flex items-center gap-2">

@@ -5,7 +5,7 @@ import Link from "next/link";
 export function LegalPage({ document }: { document: LegalDocument }) {
   return (
     <main className="min-h-screen bg-background">
-      <div className="container mx-auto max-w-4xl px-6 py-16 border-x border-dashed border-b">
+      <div className="container mx-auto max-w-6xl px-6 py-16 border-x border-dashed border-b">
         <div className="space-y-4">
           <Link
             href="/"

@@ -27,7 +27,7 @@ const Pricing = () => {
   };
 
   return (
-    <section className="container mx-auto max-w-4xl px-6 py-16 md:py-18 text-left border-x border-dashed border-b">
+    <section className="container mx-auto max-w-6xl px-6 py-16 md:py-18 text-left border-x border-dashed border-b">
       <div className="text-left mb-16">
         <h2 className="text-3xl font-medium tracking-tight mb-4 font-doto">
           <span className="whitespace-nowrap flex items-center gap-2">
