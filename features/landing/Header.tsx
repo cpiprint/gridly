@@ -10,7 +10,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-export const Header = () => {
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+export const Header = async () => {
+  const session = await auth.api.getSession({ headers: await headers() });
+
   return (
     <div
       className="container mx-auto sticky top-0 z-50 max-w-6xl px-6 
@@ -66,9 +70,9 @@ export const Header = () => {
           </TooltipContent>
         </Tooltip>
         <ModeToggle />
-        <Link href="/sign-in" prefetch>
+        <Link href={session?.user ? "/dashboard" : "/sign-in"} prefetch>
           <Button variant={"outline"} size={"sm"}>
-            Log in
+            {session?.user ? "Dashboard" : "Log in"}
           </Button>
         </Link>
       </div>
