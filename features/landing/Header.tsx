@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { HeartIcon } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { appConfig } from "@/config";
 import Link from "next/link";
@@ -22,6 +23,25 @@ export const Header = () => {
         </span>
       </Link>
       <div className="flex items-center gap-4 ">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
+              href="https://buymeacoffee.com/adikodez"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                variant="ghost"
+                className="rounded-full active:scale-95 transition-all duration-300 text-muted-foreground hover:text-foreground hover:bg-muted hidden sm:flex items-center gap-2"
+              >
+                <HeartIcon className="size-4 fill-yellow-500 group-hover:animate-pulse" />
+              </Button>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Buy me a coffee ☕</p>
+          </TooltipContent>
+        </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
             <Link
