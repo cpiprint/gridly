@@ -3,24 +3,31 @@ import { ArrowRight, DatabaseIcon } from "lucide-react";
 import { appConfig, landingConfig } from "@/config";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
+import { getGitHubRepoStars } from "@/lib/github";
 
 const { hero } = landingConfig;
 
-export const Hero = () => {
+export const Hero = async () => {
+  const stars = await getGitHubRepoStars(appConfig.github);
+
   return (
-    <section className="container mx-auto max-w-6xl px-6 py-24 md:py-32 text-left border-x border-dashed border-b">
-      <h1 className="text-4xl md:text-6xl tracking-tight font-medium relative">
-        <span className="text-primary inline-flex items-center gap-2">
+    <section className="container mx-auto max-w-6xl px-6 py-20 md:py-28 text-left border-x border-dashed border-b">
+      <div className="max-w-3xl">
+        <p className="mb-4 inline-flex items-center rounded-full border border-dashed bg-muted/60 px-3 py-1 text-xs font-medium tracking-wide text-muted-foreground">
+          Open-source starter, production ready
+        </p>
+        <h1 className="text-4xl md:text-6xl tracking-tight font-semibold leading-tight">
+          <span className="text-primary inline-flex items-center gap-2">
           {hero.titleAccent}
           <DatabaseIcon className="size-8 md:size-10 text-primary fill-primary/30" />
-        </span>
-        <br />
-        <span className="block mt-1">{hero.title}</span>
-      </h1>
+          </span>
+          <span className="block mt-2 text-foreground">{hero.title}</span>
+        </h1>
 
-      <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
-        {hero.subtitle}
-      </p>
+        <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
+          {hero.subtitle}
+        </p>
+      </div>
 
       <div className="flex flex-col sm:flex-row gap-4 mt-10">
         <Link href="/sign-in" prefetch className="cursor-pointer">
@@ -38,6 +45,9 @@ export const Hero = () => {
           <Button size="lg" variant="secondary" className="w-full sm:w-auto">
             <FaGithub />
             Star on GitHub
+            <span className="ml-1 rounded-md bg-background px-1.5 py-0.5 text-xs tabular-nums text-foreground">
+              {stars.toLocaleString()}
+            </span>
           </Button>
         </Link>
       </div>
