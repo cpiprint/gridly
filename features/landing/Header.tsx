@@ -12,8 +12,11 @@ import {
 } from "@/components/ui/tooltip";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { getGitHubRepoStars } from "@/lib/github";
+
 export const Header = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
+  const stars = await getGitHubRepoStars(appConfig.github);
 
   return (
     <div
@@ -58,10 +61,12 @@ export const Header = async () => {
             >
               <Button
                 variant="ghost"
-                size="icon"
-                className="group rounded-full active:scale-95 transition-all duration-300 text-muted-foreground hover:text-foreground hover:bg-muted"
+                className="group h-9 rounded-full active:scale-95 transition-all duration-300 text-muted-foreground hover:text-foreground hover:bg-muted px-3"
               >
                 <FaGithub className="transition-transform duration-500 ease-in-out group-hover:rotate-12 group-hover:scale-110" />
+                <span className="ml-1 text-xs font-medium tabular-nums">
+                  {stars.toLocaleString()}
+                </span>
               </Button>
             </Link>
           </TooltipTrigger>
