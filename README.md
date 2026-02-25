@@ -15,6 +15,8 @@ Auth, database, payments, AI chat, background jobs — fully wired.<br/>
 
 [Live Demo](https://gridly.akoder.xyz) · [Quick Start](#quick-start) · [Buy Me a Coffee](https://buymeacoffee.com/adikodez)
 
+[![RepoStars](https://repostars.dev/api/embed?repo=AdityaKodez%2Fgridly&theme=dark)](https://repostars.dev/?repos=AdityaKodez%2Fgridly&theme=dark)
+
 ![Gridly Preview](public/preview.png)
 
 </div>
